@@ -1,0 +1,114 @@
+"===[ Personal Configuration Setup ]==="
+set nocompatible    "This fixes the problem where arrow keys do not function properly on some systems.
+set mouse=a         "Allows you to click around the text editor with your mouse to move the cursor
+set showmatch       "Highlights matching brackets in programming languages
+set autoindent      "If you're indented, new lines will also be indented
+set smartindent     "Automatically indents lines after opening a bracket in programming languages
+set backspace=2     "This makes the backspace key function like it does in other programs.
+set tabstop=4       "How much space Vim gives to a tab
+set number          "Enables line numbering
+set smarttab        "Improves tabbing
+set noexpandtab     "set Expand tab off"
+set shiftwidth=4    "Assists code formatting
+set foldmethod=manual  "Lets you hide sections of code
+
+" --- auto indent script
+nnoremap ,f :set tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab<CR>
+map ff  mzgg=G`z<CR>
+vnoremap f =
+
+" --- Vim controls
+inoremap jk <Esc>l
+nnoremap ;; :w<CR>
+nnoremap ;w :w<CR>
+nnoremap ;sp :split<CR>
+nnoremap ;vsp :vsplit<CR>
+nnoremap ;;q :bdelete<CR>
+nnoremap `p :set paste<CR>
+nnoremap `v :set nopaste<CR>
+nnoremap `m :set mouse=a<CR>
+nnoremap `n :set mouse-=a<CR>
+
+" --- Buffer Commands
+nnoremap <F5> :buffers<CR>:buffer<Space>
+nnoremap bn :bn<CR>
+nnoremap bp :bp<CR>
+
+"--- Navigation commands
+map i <Up>
+map j <Left>
+map k <Down>
+noremap h i
+"--- Ends navigation commands
+
+" --- Tab Commands
+nnoremap tn :tabnext<CR>
+nnoremap tp :tabprevious<CR>
+nnoremap `t :tabnew<CR>
+
+" --- Vim controlls
+inoremap jk <Esc>l
+nnoremap ;; :w<CR>
+nnoremap ;w :w<CR>
+nnoremap ;sp :split<CR>
+nnoremap ;vsp :vsplit<CR>
+nnoremap ;;q :bdelete<CR>
+nnoremap `p :set paste<CR>
+nnoremap `v :set nopaste<CR>
+nnoremap `m :set mouse=a<CR>
+nnoremap `n :set mouse-=a<CR>
+
+" --- Buffer Commands
+nnoremap <F5> :buffers<CR>:buffer<Space>
+nnoremap bn :bn<CR>
+nnoremap bp :bp<CR>
+
+"--- navigation commands
+map i <Up>
+map j <Left>
+map k <Down>
+noremap h i
+
+" --- If the .tags file exists, use it as a tags]
+if !empty(glob(".tags"))
+  set tags=.tags
+endif
+
+"===[ Color Scheme Setup ]==="
+set t_Co=256            "Sets it to 256 color mode
+colorscheme jellybeans  "Set ColorScheme to Jelly Beans
+let g:jellybeans_use_lowcolor_black = 0 "use Vim's grey instead of straight black background
+
+"===[ Plugin Configuration ] ==="
+"
+" --- CTRL P
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+let g:ctrlp_working_path_mode = 'ra'
+
+" --- Tagbar
+nmap <F7> :TagbarToggle<CR>
+
+" --- NERDTree
+nmap <F8> :NERDTreeTabsToggle<CR>
+
+" --- Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_php_checkers=['php', 'phpcs']
+let g:syntastic_php_phpcs_args='--standard=PSR2 -n'
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" --- Airline
+let g:airline#extensions#tabline#enabled = 1
+
+" --- vim-eighties
+let g:eighties_enabled = 1
+let g:eighties_minimum_width = 80
+let g:eighties_extra_width = 0 " Increase this if you want some extra room
+let g:eighties_compute = 1 " Disable this if you just want the minimum + extra
+let g:eighties_bufname_additional_patterns = ['fugitiveblame'] " Defaults to [], 'fugitiveblame' is only an example. Takes a comma delimited list of bufnames as strings.
