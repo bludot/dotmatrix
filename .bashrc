@@ -1,6 +1,14 @@
 # ~/.bashrc
 # vim:set ft=sh sw=2 sts=2:
 
+export ANDROID_HOME=/Users/jamestrotter/Library/Android/sdk
+#export GOROOT=/usr/local/go
+export GOPATH=$HOME/go
+#export GOOS=darwin
+#export GOARCH=amd64
+#export GOBIN=$GOROOT/bin
+#export PATH=$PATH:$GOBIN
+#export PATH=$PATH:/usr/local/go/bin
 source "$HOME/.sharedrc"
 
 # Store 10,000 history entries
@@ -10,35 +18,39 @@ export HISTCONTROL=erasedups
 # Append to history file
 shopt -s histappend
 
-VISUAL=vim
-EDITOR="$VISUAL"
-LESS="FRX"
-RI="--format ansi -T"
-PSQL_EDITOR='vim -c"setf sql"'
-CLICOLOR=1
-LSCOLORS=gxgxcxdxbxegedabagacad
+export VISUAL=vim
+export EDITOR="$VISUAL"
+export LESS="FRX"
+export RI="--format ansi -T"
+export PSQL_EDITOR='vim -c"setf sql"'
+export CLICOLOR=1
+export LSCOLORS=gxgxcxdxbxegedabagacad
 
-export VISUAL EDITOR LESS RI PSQL_EDITOR CLICOLOR LSCOLORS
+#export VISUAL EDITOR LESS RI PSQL_EDITOR CLICOLOR LSCOLORS
 
-if [ -t 1 ]; then
-bind 'set bind-tty-special-chars off'
-bind '"\ep": history-search-backward'
-bind '"\en": history-search-forward'
-bind '"\C-w": backward-kill-word'
-bind '"\C-q": "%-\n"'
-fi
+#if [ -t 1 ]; then
+#bind 'set bind-tty-special-chars off'
+#bind '"\ep": history-search-backward'
+#bind '"\en": history-search-forward'
+#bind '"\C-w": backward-kill-word'
+#bind '"\C-q": "%-\n"'
+#fi
 
 export HISTIGNORE="%*"
 
-[ -z "$PS1" ] || stty -ixon
+#[ -z "$PS1" ] || stty -ixon
 
-[ -z "$PS1" ] || export PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;36m\]\w\[\033[00m\]\$(git_prompt_info '(%s)')$ "
 
-if [ -f '/usr/local/etc/bash_completion.d/git-completion.bash' ]; then
-  source '/usr/local/etc/bash_completion.d/git-completion.bash'
-fi
+#if [ -f '/usr/local/etc/bash_completion.d/git-completion.bash' ]; then
+#  source '/usr/local/etc/bash_completion.d/git-completion.bash'
+#fi
 
 #Aliases
 alias whatsmyip="wget http://ipinfo.io/ip -qO -"
 
-[ ! -f "$HOME/.bashrc.local" ] || . "$HOME/.bashrc.local"
+#export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+
+#[ ! -f "$HOME/.bashrc.local" ] || . "$HOME/.bashrc.local"
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"

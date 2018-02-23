@@ -26,8 +26,9 @@
 	ui = auto
 [core]
 	excludesfile = ~/.cvsignore
-	editor = vim
+	editor = nvim
 	whitespace = warn
+	autocrlf = input
 [help]
 	autocorrect = 10
 [interactive]
@@ -58,3 +59,6 @@
 	algorithm = patience
 [include]
 	path = ~/.gitconfig.local
+[user]
+	name = james
+	email = admin@floretos.com
