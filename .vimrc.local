@@ -12,9 +12,14 @@ set noexpandtab     "set Expand tab off"
 set shiftwidth=4    "Assists code formatting
 set foldmethod=manual  "Lets you hide sections of code
 
+
+" --- ack
+let g:ackprg = 'ag --nogroup --column'
+
 " --- auto indent script
-nnoremap ,f :set tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab<CR>
-map ff  mzgg=G`z<CR>
+nnoremap ,f :set tabstop=2 softtabstop=2 shiftwidth=2 noexpandtab<CR>
+" map ff  mzgg=G`z<CR>
+noremap <silent> ff :Autoformat<CR>
 vnoremap f =
 
 " --- Vim controls
@@ -68,47 +73,157 @@ map i <Up>
 map j <Left>
 map k <Down>
 noremap h i
+if !has('nvim')
+  set ttymouse=xterm2
+endif
 
 " --- If the .tags file exists, use it as a tags]
-if !empty(glob(".tags"))
-  set tags=.tags
-endif
+" if !empty(glob(".tags"))
+set tags=./.idea/tags
+" endif
 
 "===[ Color Scheme Setup ]==="
 set t_Co=256            "Sets it to 256 color mode
-colorscheme jellybeans  "Set ColorScheme to Jelly Beans
-let g:jellybeans_use_lowcolor_black = 0 "use Vim's grey instead of straight black background
+"colorscheme jellybeans  "Set ColorScheme to Jelly Beans
+set background=dark
+colorscheme jellybeans
+"let g:jellybeans_use_lowcolor_black = 0 "use Vim's grey instead of straight black background
+"let g:Powerline_symbols = 'fancy'
+set encoding=utf8
+set fillchars+=vert:\│
+hi VertSplit ctermfg=Black ctermbg=Black guibg=bg guifg=bg
+set fillchars+=stl:\ ,stlnc:\
+set termencoding=utf8
+" let g:solarized_termcolors=256
+set laststatus=2
+"set guifont=Fira\ Mono\ for\ Powerline:h16
+"set guifont=Fura\ Mono\ Regular\ Nerd\ Font\ Complete:h16
+set guifont=FuraMonoNerdFontCM-Regular:h16
+"set guifont=DroidSansMono\ Nerd\ Font:h11
+"set guifont=Droid\ Sans\ Mono\ Nerd\ Font\ Complete\ Mono:h11
+"set guioptions-=T guioptions-=e guioptions-=L guioptions-=r
 
 "===[ Plugin Configuration ] ==="
 "
 " --- CTRL P
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 
 " --- Tagbar
 nmap <F7> :TagbarToggle<CR>
 
 " --- NERDTree
-nmap <F8> :NERDTreeTabsToggle<CR>
+nmap <F8> :NERDTreeToggle<CR>
+" nmap <F8> :VimFilerExplorer<CR>
+" nmap gf :VimFilerExplorer -find<CR>
+nmap gf :NERDTreeFind<CR>
+"let NERDTreeMapOpenInTab='\r'
+let g:nerdtree_tabs_focus_on_files = 1
+" let g:nerdtree_tabs_autofind = 1
+let g:NERDTreeMapOpenInTab = '<2-LeftMouse>'
+"let NERDTreeMapOpenInTab='<ENTER>'
+
+" --- VimFilerExplorer
+let g:vimfiler_tree_leaf_icon = ' '
+let g:vimfiler_tree_opened_icon = '▾'
+let g:vimfiler_tree_closed_icon = '▸'
+let g:vimfiler_file_icon = ' '
+let g:vimfiler_marked_file_icon = '*'
 
 " --- Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 
-let g:syntastic_php_checkers=['php', 'phpcs']
-let g:syntastic_php_phpcs_args='--standard=PSR2 -n'
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_javascript_checkers = ['eslint']
+" let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
+
+" --- ale
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 0
+let g:ale_linters = {'jsx': ['stylelint', 'eslint']}
+let g:ale_linter_aliases = {'jsx': 'css'}
+let g:ale_fixers = {
+\  'javascript': ['eslint'],
+\}
+nmap <silent> <C-k> <Plug>(ale_previous)
+nmap <silent> <C-j> <Plug>(ale_next)
 
 " --- Airline
+let g:airline_theme='powerlineish'
+let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 
-" --- vim-eighties
-let g:eighties_enabled = 1
-let g:eighties_minimum_width = 80
-let g:eighties_extra_width = 0 " Increase this if you want some extra room
-let g:eighties_compute = 1 " Disable this if you just want the minimum + extra
-let g:eighties_bufname_additional_patterns = ['fugitiveblame'] " Defaults to [], 'fugitiveblame' is only an example. Takes a comma delimited list of bufnames as strings.
+" --- devicons
+let g:webdevicons_enable = 1
+let g:webdevicons_enable_nerdtree = 1
+let g:WebDevIconsUnicodeGlyphDoubleWidth = 0
+let g:webdevicons_conceal_nerdtree_brackets = 1
+let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:DevIconsEnableFoldersOpenClose = 1
+
+" --- identguide
+let g:indentLine_color_term = 239
+
+
+" --- vim emoji stuff
+set completefunc=emoji#complete
+
+" --- vim jsx
+let g:jsx_ext_required = 0
+
+" --- vim javascript
+let g:javascript_plugin_jsdoc = 1
+
+" --- vim-jsdoc
+let g:jsdoc_enable_es6=1
+
+" --- vim-conflicted
+
+set stl+=%{ConflictedVersion()}
+
+" --- gutentags
+set statusline+=%{gutentags#statusline('[Generating...]')}
+let g:gutentags_ctags_tagfile="./.idea/tags"
+let g:gutentags_debug=1
+let g:gutentags_define_advanced_commands=1
+
+" --- tern for vim
+let g:tern_show_argument_hints="on_move"
+
+" --- deoplete
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#omni#functions = {}
+let g:deoplete#omni#functions.javascript = [
+  \ 'tern#Complete',
+  \ 'jspc#omni'
+\]
+let g:deoplete#omni#functions = {}
+let g:deoplete#omni#functions.javascript = [
+  \ 'tern#Complete',
+  \ 'jspc#omni'
+\]
+
+set completeopt=longest,menuone,preview
+let g:deoplete#sources = {}
+let g:deoplete#sources['javascript.jsx'] = ['file', 'ultisnips', 'ternjs']
+let g:tern#command = ['tern']
+let g:tern#arguments = ['--persistent']
+
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+
+autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+let g:UltiSnipsExpandTrigger="<C-j>"
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" close the preview window when you're not using it
+let g:SuperTabClosePreviewOnPopupClose = 1
+" or just disable the preview entirely
+set completeopt-=preview

@@ -1,14 +1,6 @@
 # ~/.bashrc
-# vim:set ft=sh sw=2 sts=2:
 
-export ANDROID_HOME=/Users/jamestrotter/Library/Android/sdk
-#export GOROOT=/usr/local/go
 export GOPATH=$HOME/go
-#export GOOS=darwin
-#export GOARCH=amd64
-#export GOBIN=$GOROOT/bin
-#export PATH=$PATH:$GOBIN
-#export PATH=$PATH:/usr/local/go/bin
 source "$HOME/.sharedrc"
 
 # Store 10,000 history entries
@@ -16,9 +8,9 @@ export HISTSIZE=10000
 # Don't store duplicates
 export HISTCONTROL=erasedups
 # Append to history file
-shopt -s histappend
+#shopt -s histappend
 
-export VISUAL=vim
+export VISUAL=nvim
 export EDITOR="$VISUAL"
 export LESS="FRX"
 export RI="--format ansi -T"
@@ -40,7 +32,6 @@ export HISTIGNORE="%*"
 
 #[ -z "$PS1" ] || stty -ixon
 
-
 #if [ -f '/usr/local/etc/bash_completion.d/git-completion.bash' ]; then
 #  source '/usr/local/etc/bash_completion.d/git-completion.bash'
 #fi
@@ -50,7 +41,6 @@ alias whatsmyip="wget http://ipinfo.io/ip -qO -"
 
 #export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 
-#[ ! -f "$HOME/.bashrc.local" ] || . "$HOME/.bashrc.local"
+[ ! -f "$HOME/.bashrc.local" ] || . "$HOME/.bashrc.local"
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
+

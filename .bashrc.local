@@ -1,2 +1,3 @@
 PATH=$PATH:~/bin
 [ ! -f "$HOME/.bash_aliases" ] || . "$HOME/.bash_aliases"
+

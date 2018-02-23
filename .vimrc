@@ -1,119 +1,118 @@
-
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+set rtp+=/usr/local/opt/fzf
+call plug#begin('~/.vim/plugged')
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
 
-" let Vundle manage Vundle, required
-"Plugin 'VundleVim/Vundle.vim'
+Plug 'Lokaltog/powerline', {'rtp': '$HOME/Library/Python/3.6/lib/python/site-packages/powerline/bindings/vim/'}
 
-"Plugin 'Chiel92/vim-autoformat'
+" Plug 'ervandew/supertab'
+Plug 'godlygeek/tabular'
+Plug 'gregsexton/gitv'
+Plug 'leshill/vim-json'
+Plug 'pangloss/vim-javascript'
+Plug 'rondale-sc/vim-spacejam'
+Plug 'chiel92/vim-autoformat'
+Plug 'tpope/vim-eunuch'
 
-"Plugin 'maksimr/vim-jsbeautify'
+" --- git related pplugins
+Plug 'tpope/vim-fugitive'
+Plug 'christoomey/vim-conflicted'
+Plug 'tpope/vim-git'
 
-"Plugin 'JamshedVesuna/vim-markdown-preview'
+Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-surround'
+" --- file manager
+Plug 'scrooloose/nerdtree'
+" Plug 'Shougo/vimfiler.vim'
+if has('nvim')
+  Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/defx.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 
-" Plugin 'altercation/vim-colors-solarized'
 
-"Plugin 'dracula/vim'
+Plug 'Shougo/unite.vim'
+Plug 'Shougo/denite.nvim'
+Plug 'fatih/vim-go'
+Plug 'kien/ctrlp.vim'
+Plug 'airblade/vim-gitgutter'
+" Plug 'jsx/jsx.vim'
+Plug 'heavenshell/vim-jsdoc'
+Plug 'mxw/vim-jsx'
+Plug 'w0rp/ale'
+Plug 'ervandew/screen'
 
-"Plugin 'editorconfig/editorconfig-vim'
+Plug 'Yggdroot/indentLine'
+" Plug 'breuckelen/vim-resize'
+Plug 'junegunn/fzf.vim'
 
-"Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+" --- javascript
+Plug 'Shougo/deoplete.nvim'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
 
-"Plugin 'scrooloose/nerdTree'
+" --- pull request reviewing?
+Plug 'junkblocker/patchreview-vim'
+Plug 'codegram/vim-codereview'
 
-"Plugin 'flazz/vim-colorschemes'
+" --- colorschemes
+" Plug 'nanotech/jellybeans.vim'
+" Plug 'altercation/vim-colors-solarized'
+" Plug 'jdkanani/vim-material-theme'
+Plug 'hzchirs/vim-material'
+Plug 'flazz/vim-colorschemes'
 
-" Plugin 'Valloric/YouCompleteMe'
+" --- tagbar related
+Plug 'majutsushi/tagbar'
+" Plug 'hushicai/tagbar-javascript.vim'
+Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'ludovicchabant/vim-gutentags'
 
-Plugin 'hashrocket/vim-hashrocket'
-Plugin 'AndrewRadev/splitjoin.vim'
-Plugin 'adamlowe/vim-slurper'
-Plugin 'duff/vim-bufonly'
-Plugin 'ervandew/supertab'
-Plugin 'godlygeek/tabular'
-Plugin 'gregsexton/gitv'
-Plugin 'heartsentwined/vim-emblem'
-Plugin 'jgdavey/tslime.vim'
-Plugin 'jgdavey/vim-blockle'
-Plugin 'jgdavey/vim-railscasts'
-Plugin 'jgdavey/vim-turbux'
-Plugin 'jgdavey/vim-weefactor'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'leshill/vim-json'
-Plugin 'mileszs/ack.vim'
-Plugin 'pangloss/vim-javascript'
-Plugin 'rondale-sc/vim-spacejam'
-Plugin 'slim-template/vim-slim'
-Plugin 'therubymug/vim-pyte'
-Plugin 'tpope/vim-abolish'
-Plugin 'tpope/vim-bundler'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-cucumber'
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-eunuch'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-git'
-Plugin 'tpope/vim-haml'
-Plugin 'tpope/vim-markdown'
-Plugin 'tpope/vim-pathogen'
-Plugin 'tpope/vim-projectionist'
-Plugin 'tpope/vim-ragtag'
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-rake'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-rsi'
-Plugin 'tpope/vim-sensible'
-Plugin 'tpope/vim-sleuth'
-Plugin 'tpope/vim-speeddating'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'tpope/vim-vividchalk'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'vim-scripts/bufexplorer.zip'
-Plugin 'vim-scripts/bufkill.vim'
-Plugin 'wgibbs/vim-irblack'
+Plug 'justincampbell/vim-eighties'
+Plug 'junegunn/vim-emoji'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-Plugin 'fatih/vim-go'
-Plugin 'kien/ctrlp.vim'
-Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'bling/vim-airline'
-Plugin 'Shougo/unite.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'justincampbell/vim-eighties'
+" --- vim syntax highlights
+Plug 'jelera/vim-javascript-syntax'
+
+Plug 'ryanoasis/vim-devicons'
 
 " The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
+" Keep Plug commands between vundle#begin/end.
 " plugin on GitHub repo
-" Plugin 'tpope/vim-fugitive'
+" Plug 'tpope/vim-fugitive'
 " plugin from http://vim-scripts.org/vim/scripts.html
-" Plugin 'L9'
+" Plug 'L9'
 " Git plugin not hosted on GitHub
-" Plugin 'git://git.wincent.com/command-t.git'
+" Plug 'git://git.wincent.com/command-t.git'
 " git repos on your local machine (i.e. when working on your own plugin)
-" Plugin 'file:///home/gmarik/path/to/plugin'
+" Plug 'file:///home/gmarik/path/to/plugin'
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
-" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Install L9 and avoid a Naming conflict if you've already installed a
 " different version somewhere else.
-" Plugin 'ascenator/L9', {'name': 'newL9'}
+" Plug 'ascenator/L9', {'name': 'newL9'}
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
+" All of your Plugs must be added before the following line
+call plug#end()
 filetype plugin indent on    " required
+let g:webdevicons_enable = 0
 
-
-syntax on
-filetype plugin indent on
+syntax enable
 
 set visualbell
 
@@ -125,9 +124,7 @@ set splitbelow
 
 set hidden
 
-set guifont=Monaco:h16
-set guioptions-=T guioptions-=e guioptions-=L guioptions-=r
-set shell=bash
+set shell=zsh
 
 augroup vimrc
   autocmd!
