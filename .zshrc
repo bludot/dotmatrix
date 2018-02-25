@@ -101,7 +101,6 @@ alias groutes='rake routes | grep $@'
 cdpath=(~ ~/src $DEV_DIR $HASHROCKET_DIR)
 
 # rvm-install added line:
-if [[ -s "$HOME/.rvm/scripts/rvm" ]] ; then source "$HOME/.rvm/scripts/rvm" ; fi
 
 cuke() {
   local file="$1"
