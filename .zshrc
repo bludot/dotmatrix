@@ -117,4 +117,18 @@ zrcl="$HOME/.zshrc.local"
 typeset -aU path
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+
+PATH="/Users/jamestrotter/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/Users/jamestrotter/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/Users/jamestrotter/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/Users/jamestrotter/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/Users/jamestrotter/perl5"; export PERL_MM_OPT;
+
+export PATH=~/Library/Python/3.6/bin:$PATH
+export PATH="/usr/local/opt/sqlite/bin:$PATH"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"  # This loads nvm
+export PATH="/usr/local/opt/openal-soft/bin:$PATH"
