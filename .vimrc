@@ -44,7 +44,7 @@ endif
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/denite.nvim'
 Plug 'fatih/vim-go'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlp/ctrlp.vim'
 Plug 'airblade/vim-gitgutter'
 " Plug 'jsx/jsx.vim'
 Plug 'heavenshell/vim-jsdoc'
