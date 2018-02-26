@@ -13,8 +13,8 @@ Plug 'Lokaltog/powerline', {'rtp': '$HOME/Library/Python/3.6/lib/python/site-pac
 " Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
 Plug 'gregsexton/gitv'
-Plug 'leshill/vim-json'
-Plug 'pangloss/vim-javascript'
+" Plug 'leshill/vim-json'
+" Plug 'pangloss/vim-javascript'
 Plug 'rondale-sc/vim-spacejam'
 Plug 'chiel92/vim-autoformat'
 Plug 'tpope/vim-eunuch'
@@ -47,8 +47,8 @@ Plug 'fatih/vim-go'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'airblade/vim-gitgutter'
 " Plug 'jsx/jsx.vim'
-Plug 'heavenshell/vim-jsdoc'
-Plug 'mxw/vim-jsx'
+" Plug 'heavenshell/vim-jsdoc'
+" Plug 'mxw/vim-jsx'
 Plug 'w0rp/ale'
 Plug 'ervandew/screen'
 
@@ -58,7 +58,6 @@ Plug 'junegunn/fzf.vim'
 
 " --- javascript
 Plug 'Shougo/deoplete.nvim'
-Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 
 " --- pull request reviewing?
@@ -69,7 +68,6 @@ Plug 'codegram/vim-codereview'
 " Plug 'nanotech/jellybeans.vim'
 " Plug 'altercation/vim-colors-solarized'
 " Plug 'jdkanani/vim-material-theme'
-Plug 'hzchirs/vim-material'
 Plug 'flazz/vim-colorschemes'
 
 " --- tagbar related
@@ -78,15 +76,16 @@ Plug 'majutsushi/tagbar'
 Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'ludovicchabant/vim-gutentags'
+Plug 'heavenshell/vim-jsdoc'
+" Plug 'ludovicchabant/vim-gutentags'
 
-Plug 'justincampbell/vim-eighties'
+" Plug 'justincampbell/vim-eighties'
 Plug 'junegunn/vim-emoji'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " --- vim syntax highlights
-Plug 'jelera/vim-javascript-syntax'
+" Plug 'jelera/vim-javascript-syntax'
 
 Plug 'ryanoasis/vim-devicons'
 
