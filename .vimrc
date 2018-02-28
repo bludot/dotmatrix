@@ -10,13 +10,16 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'Lokaltog/powerline', {'rtp': '$HOME/Library/Python/3.6/lib/python/site-packages/powerline/bindings/vim/'}
 
-" Plug 'ervandew/supertab'
+Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
 Plug 'gregsexton/gitv'
-" Plug 'leshill/vim-json'
-" Plug 'pangloss/vim-javascript'
+Plug 'leshill/vim-json'
 Plug 'rondale-sc/vim-spacejam'
-Plug 'chiel92/vim-autoformat'
+" Plug 'chiel92/vim-autoformat'
+Plug 'sbdchd/neoformat'
+Plug 'prettier/vim-prettier', {
+    \ 'do': 'npm install',
+    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss'] }
 Plug 'tpope/vim-eunuch'
 
 " --- git related pplugins
@@ -47,22 +50,37 @@ Plug 'fatih/vim-go'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'airblade/vim-gitgutter'
 " Plug 'jsx/jsx.vim'
-" Plug 'heavenshell/vim-jsdoc'
-" Plug 'mxw/vim-jsx'
 Plug 'w0rp/ale'
 Plug 'ervandew/screen'
 
 Plug 'Yggdroot/indentLine'
 " Plug 'breuckelen/vim-resize'
 Plug 'junegunn/fzf.vim'
+Plug 'mileszs/ack.vim'
 
 " --- javascript
-Plug 'Shougo/deoplete.nvim'
-Plug 'roxma/vim-hug-neovim-rpc'
-
+" --- --- autocomplete
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+Plug 'pangloss/vim-javascript'
+" Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
+" Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'heavenshell/vim-jsdoc'
+Plug 'mxw/vim-jsx'
+Plug 'moll/vim-node'
+Plug 'groenewege/vim-less'
 " --- pull request reviewing?
 Plug 'junkblocker/patchreview-vim'
 Plug 'codegram/vim-codereview'
+
+" --- editor tools
+Plug 'terryma/vim-multiple-cursors'
 
 " --- colorschemes
 " Plug 'nanotech/jellybeans.vim'
@@ -73,19 +91,12 @@ Plug 'flazz/vim-colorschemes'
 " --- tagbar related
 Plug 'majutsushi/tagbar'
 " Plug 'hushicai/tagbar-javascript.vim'
-Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'heavenshell/vim-jsdoc'
-" Plug 'ludovicchabant/vim-gutentags'
+Plug 'ludovicchabant/vim-gutentags'
 
 " Plug 'justincampbell/vim-eighties'
 Plug 'junegunn/vim-emoji'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-
-" --- vim syntax highlights
-" Plug 'jelera/vim-javascript-syntax'
 
 Plug 'ryanoasis/vim-devicons'
 
