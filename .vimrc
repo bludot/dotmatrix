@@ -15,7 +15,7 @@ Plug 'godlygeek/tabular'
 Plug 'gregsexton/gitv'
 Plug 'leshill/vim-json'
 Plug 'rondale-sc/vim-spacejam'
-" Plug 'chiel92/vim-autoformat'
+Plug 'chiel92/vim-autoformat'
 Plug 'sbdchd/neoformat'
 Plug 'prettier/vim-prettier', {
     \ 'do': 'npm install',
@@ -81,6 +81,8 @@ Plug 'codegram/vim-codereview'
 
 " --- editor tools
 Plug 'terryma/vim-multiple-cursors'
+Plug 'dyng/ctrlsf.vim'
+Plug 'yuttie/comfortable-motion.vim'
 
 " --- colorschemes
 " Plug 'nanotech/jellybeans.vim'
