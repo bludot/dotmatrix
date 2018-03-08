@@ -1,9 +1,9 @@
-fpath=(
-  $fpath
-  ~/.rvm/scripts/zsh/Completion
-  ~/.zsh/functions
-  /usr/local/share/zsh/site-functions
-)
+#fpath=(
+#  $fpath
+#  ~/.rvm/scripts/zsh/Completion
+#  ~/.zsh/functions
+#  /usr/local/share/zsh/site-functions
+#)
 
 source "$HOME/.sharedrc"
 
@@ -41,32 +41,6 @@ setopt appendhistory autocd extendedglob histignoredups nonomatch prompt_subst i
 
 # Bindings
 # external editor support
-autoload edit-command-line
-zle -N edit-command-line
-bindkey '^x^e' edit-command-line
-
-# Partial word history completion
-bindkey '\ep' up-line-or-search
-bindkey '\en' down-line-or-search
-bindkey '\ew' kill-region
-
-if [ -z "$TMUX" ]; then
-  fg-widget() {
-    stty icanon echo pendin -inlcr < /dev/tty
-    stty discard '^O' dsusp '^Y' lnext '^V' quit '^\' susp '^Z' < /dev/tty
-    zle reset-prompt
-    if jobs %- >/dev/null 2>&1; then
-      fg %-
-    else
-      fg
-    fi
-  }
-
-  zle -N fg-widget
-  bindkey -M emacs "^Z" fg-widget
-  bindkey -M vicmd "^Z" fg-widget
-  bindkey -M viins "^Z" fg-widget
-fi
 
 # prompt
 PROMPT='%{$fg_bold[green]%}%n@%m%{$reset_color%}:%{$fg_bold[cyan]%}%~%{$reset_color%}$(git_prompt_info "(%s)")%# '
@@ -81,33 +55,8 @@ SAVEHIST=10000
 setopt APPEND_HISTORY
 setopt INC_APPEND_HISTORY
 
-# default apps
-(( ${+PAGER}   )) || export PAGER='less'
-(( ${+EDITOR}  )) || export EDITOR='vim'
-export PSQL_EDITOR='vim -c"setf sql"'
-
-# aliases
-alias ll="ls -l"
-alias la="ls -a"
-alias l.='ls -ld .[^.]*'
-alias lsd='ls -ld *(-/DN)'
-alias md='mkdir -p'
-alias rd='rmdir'
-alias cd..='cd ..'
-alias ..='cd ..'
-alias groutes='rake routes | grep $@'
-
 # set cd autocompletion to commonly visited directories
 cdpath=(~ ~/src $DEV_DIR $HASHROCKET_DIR)
-
-# rvm-install added line:
-
-cuke() {
-  local file="$1"
-  shift
-  cucumber "features/$(basename $file)" $@
-}
-compctl -g '*.feature' -W features cuke
 
 # import local zsh customizations, if present
 zrcl="$HOME/.zshrc.local"
@@ -115,8 +64,6 @@ zrcl="$HOME/.zshrc.local"
 
 # remove duplicates in $PATH
 typeset -aU path
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
