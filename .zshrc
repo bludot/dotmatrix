@@ -4,8 +4,8 @@
 #  ~/.zsh/functions
 #  /usr/local/share/zsh/site-functions
 #)
-
-source "$HOME/.sharedrc"
+export TERM="xterm-256color"
+export ZPLUG_HOME=/usr/local/opt/zplug
 
 # color term
 export CLICOLOR=1
@@ -14,40 +14,6 @@ export ZLS_COLORS=$LSCOLORS
 export LC_CTYPE=en_US.UTF-8
 export LESS=FRX
 
-# make with the nice completion
-autoload -U compinit; compinit
-
-# Completion for kill-like commands
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
-zstyle ':completion:*:*:*:*:processes' command "ps -u `whoami` -o pid,user,comm -w -w"
-zstyle ':completion:*:ssh:*' tag-order hosts users
-zstyle ':completion:*:ssh:*' group-order hosts-domain hosts-host users hosts-ipaddr
-
-# ignore completion functions (until the _ignored completer)
-zstyle ':completion:*:functions' ignored-patterns '_*'
-
-zstyle ':completion:*' accept-exact '*(N)'
-zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path ~/.zshcache
-
-# make with the pretty colors
-autoload colors; colors
-
-# just say no to zle vim mode:
-bindkey -e
-
-# options
-setopt appendhistory autocd extendedglob histignoredups nonomatch prompt_subst interactivecomments
-
-# Bindings
-# external editor support
-
-# prompt
-PROMPT='%{$fg_bold[green]%}%n@%m%{$reset_color%}:%{$fg_bold[cyan]%}%~%{$reset_color%}$(git_prompt_info "(%s)")%# '
-
-# show non-success exit code in right prompt
-RPROMPT="%(?..{%{$fg[red]%}%?%{$reset_color%}})"
-
 # history
 HISTFILE=~/.zsh_history
 HISTSIZE=5000
@@ -55,12 +21,112 @@ SAVEHIST=10000
 setopt APPEND_HISTORY
 setopt INC_APPEND_HISTORY
 
-# set cd autocompletion to commonly visited directories
-cdpath=(~ ~/src $DEV_DIR $HASHROCKET_DIR)
+# options
+setopt appendhistory autocd extendedglob histignoredups nonomatch prompt_subst interactivecomments
+source $HOME/.zshrc.local
+source $ZPLUG_HOME/init.zsh
 
-# import local zsh customizations, if present
-zrcl="$HOME/.zshrc.local"
-[[ ! -a $zrcl ]] || source $zrcl
+# zplug "sindresorhus/pure", as:theme, use:"*.zsh"
+
+
+# Make sure to use double quotes
+zplug "zsh-users/zsh-history-substring-search"
+
+# Use the package as a command
+# And accept glob patterns (e.g., brace, wildcard, ...)
+zplug "Jxck/dotfiles", as:command, use:"bin/{histuniq,color}"
+
+# Can manage everything e.g., other person's zshrc
+zplug "tcnksm/docker-alias", use:zshrc
+
+# Disable updates using the "frozen" tag
+zplug "k4rthik/git-cal", as:command, frozen:1
+
+# Grab binaries from GitHub Releases
+# and rename with the "rename-to:" tag
+zplug "junegunn/fzf-bin", \
+    from:gh-r, \
+    as:command, \
+    rename-to:fzf, \
+    use:"*darwin*amd64*"
+
+# Supports oh-my-zsh plugins and the like
+zplug "plugins/git",   from:oh-my-zsh
+zplug "plugins/colorize",  from:oh-my-zsh
+zplug "plugins/compleat",  from:oh-my-zsh
+
+# Also prezto
+zplug "modules/prompt", from:prezto
+
+# Load if "if" tag returns true
+zplug "lib/clipboard", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
+
+# Run a command after a plugin is installed/updated
+# Provided, it requires to set the variable like the following:
+# ZPLUG_SUDO_PASSWORD="********"
+zplug "jhawthorn/fzy", \
+    as:command, \
+    rename-to:fzy, \
+    hook-build:"make && sudo make install"
+
+# Supports checking out a specific branch/tag/commit
+zplug "b4b4r07/enhancd", at:v1
+zplug "mollifier/anyframe", at:4c23cb60
+
+# Can manage gist file just like other packages
+zplug "b4b4r07/79ee61f7c140c63d2786", \
+    from:gist, \
+    as:command, \
+    use:get_last_pane_path.sh
+
+# Support bitbucket
+zplug "b4b4r07/hello_bitbucket", \
+    from:bitbucket, \
+    as:command, \
+    use:"*.sh"
+
+# Rename a command with the string captured with `use` tag
+zplug "b4b4r07/httpstat", \
+    as:command, \
+    use:'(*).sh', \
+    rename-to:'$1'
+
+# Group dependencies
+# Load "emoji-cli" if "jq" is installed in this example
+zplug "stedolan/jq", \
+    from:gh-r, \
+    as:command, \
+    rename-to:jq
+zplug "b4b4r07/emoji-cli", \
+    on:"stedolan/jq"
+# Note: To specify the order in which packages should be loaded, use the defer
+#       tag described in the next section
+
+# Set the priority when loading
+# e.g., zsh-syntax-highlighting must be loaded
+# after executing compinit command and sourcing other plugins
+# (If the defer tag is given 2 or above, run after compinit command)
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
+
+# Can manage local plugins
+zplug "~/.zsh", from:local
+
+# Load theme file
+# zplug 'dracula/zsh', as:theme
+
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+# Then, source plugins and add commands to $PATH
+zplug load
+
+autoload -U promptinit; promptinit
+prompt spaceship
 
 # remove duplicates in $PATH
 typeset -aU path

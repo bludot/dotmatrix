@@ -1,7 +1,6 @@
 # ~/.bashrc
 
 export GOPATH=$HOME/go
-source "$HOME/.sharedrc"
 
 # Store 10,000 history entries
 export HISTSIZE=10000
