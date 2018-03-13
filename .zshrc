@@ -19,14 +19,14 @@ export LC_CTYPE=en_US.UTF-8
 export LESS=FRX
 
  
-if [ "$(uname)" == "Darwin" ]; then
+if [[ "$(uname)" == "Darwin" ]]; then
   export ZPLUG_HOME=/usr/local/opt/zplug
 else
   export ZPLUG_HOME=$HOME/.zplug
 fi
 
 if [[ ! -f $ZPLUG_HOME/init.zsh ]]; then
-  if [ "$(uname)" == "Darwin" ]; then
+  if [[ "$(uname)" == "Darwin" ]]; then
     brew install zplug
   else
     curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
