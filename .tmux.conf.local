@@ -1,4 +1,19 @@
+set -g prefix C-b
+
+unbind-key C-a
+bind-key C-b send-prefix
+
+set-option -g mouse on
+
+bind | split-window -h
+
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+bind ` select-window -t 0
 bind < resize-pane -L 10
 bind > resize-pane -R 10
 bind v resize-pane -D 10
 bind ^ resize-pane -U 10
+
