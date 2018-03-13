@@ -5,11 +5,11 @@ set showmatch       "Highlights matching brackets in programming languages
 set autoindent      "If you're indented, new lines will also be indented
 set smartindent     "Automatically indents lines after opening a bracket in programming languages
 set backspace=2     "This makes the backspace key function like it does in other programs.
-set tabstop=4       "How much space Vim gives to a tab
+set tabstop=2       "How much space Vim gives to a tab
 set number          "Enables line numbering
 set smarttab        "Improves tabbing
 set noexpandtab     "set Expand tab off"
-set shiftwidth=4    "Assists code formatting
+set shiftwidth=2    "Assists code formatting
 set foldmethod=manual  "Lets you hide sections of code
 
 
@@ -19,7 +19,7 @@ let g:ackprg = 'ag --nogroup --column'
 " --- auto indent script
 nnoremap ,f :set tabstop=2 softtabstop=2 shiftwidth=2 noexpandtab<CR>
 " map ff  mzgg=G`z<CR>
-noremap <silent> ff :Autoformat<CR>
+noremap <silent> ff :Neoformat<CR>
 vnoremap f =
 
 " --- Vim controls
@@ -79,23 +79,43 @@ endif
 
 " --- If the .tags file exists, use it as a tags]
 " if !empty(glob(".tags"))
-set tags=./.idea/tags
+" set tags=./.tags
 " endif
 
 "===[ Color Scheme Setup ]==="
 set t_Co=256            "Sets it to 256 color mode
 "colorscheme jellybeans  "Set ColorScheme to Jelly Beans
+" set background=dark
 set background=dark
-colorscheme jellybeans
+colorscheme gruvbox
+hi vertsplit ctermfg=238 ctermbg=235
+hi LineNr ctermfg=237
+hi StatusLine ctermfg=235 ctermbg=245
+hi StatusLineNC ctermfg=235 ctermbg=237
+hi Search ctermbg=58 ctermfg=15
+hi Default ctermfg=1
+hi clear SignColumn
+hi SignColumn ctermbg=235
+hi GitGutterAdd ctermbg=235 ctermfg=245
+hi GitGutterChange ctermbg=235 ctermfg=245
+hi GitGutterDelete ctermbg=235 ctermfg=245
+hi GitGutterChangeDelete ctermbg=235 ctermfg=245
 "let g:jellybeans_use_lowcolor_black = 0 "use Vim's grey instead of straight black background
 "let g:Powerline_symbols = 'fancy'
 set encoding=utf8
-set fillchars+=vert:\│
-hi VertSplit ctermfg=Black ctermbg=Black guibg=bg guifg=bg
-set fillchars+=stl:\ ,stlnc:\
 set termencoding=utf8
-" let g:solarized_termcolors=256
+set fillchars=vert:\ ,stl:\ ,stlnc:\
 set laststatus=2
+set noshowmode
+hi clear CursorLine
+augroup CLClear
+    autocmd! ColorScheme * hi clear CursorLine
+augroup END
+" hi CursorLineNR cterm=bold
+augroup CLNRSet
+    autocmd! ColorScheme * hi CursorLineNR cterm=bold ctermbg=NONE ctermfg=NONE
+augroup END
+set cursorline
 "set guifont=Fira\ Mono\ for\ Powerline:h16
 "set guifont=Fura\ Mono\ Regular\ Nerd\ Font\ Complete:h16
 set guifont=FuraMonoNerdFontCM-Regular:h16
@@ -160,6 +180,22 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 
+let g:airline_theme_patch_func = 'AirlineThemePatch'
+function! AirlineThemePatch(palette)
+  if g:airline_theme == 'powerlineish'
+    let i = 0
+    let a:palette.normal.airline_c = ['#ffffff', '#121212', 231, 235, '']
+    let a:palette.insert.airline_c = ['#87d7ff', '#005f87', 117, 235, '']
+    for colors in values(a:palette.normal)
+      if i == 0
+"        let colors[3] = 243
+      endif
+      let i += 1
+    endfor
+  endif
+endfunction
+
+
 " --- devicons
 let g:webdevicons_enable = 1
 let g:webdevicons_enable_nerdtree = 1
@@ -190,10 +226,14 @@ let g:jsdoc_enable_es6=1
 set stl+=%{ConflictedVersion()}
 
 " --- gutentags
+let g:gutentags_cache_dir="~/.gutentags_cache_dir"
 set statusline+=%{gutentags#statusline('[Generating...]')}
-let g:gutentags_ctags_tagfile="./.idea/tags"
 let g:gutentags_debug=1
 let g:gutentags_define_advanced_commands=1
+let g:gutentags_ctags_auto_set_tags=1
+let g:gutentags_ctags_exclude=[
+      \ 'node_modules',
+      \ ]
 
 " --- tern for vim
 let g:tern_show_argument_hints="on_move"
@@ -213,9 +253,12 @@ let g:deoplete#omni#functions.javascript = [
 
 set completeopt=longest,menuone,preview
 let g:deoplete#sources = {}
-let g:deoplete#sources['javascript.jsx'] = ['file', 'ultisnips', 'ternjs']
+let g:deoplete#sources['javascript.jsx'] = ['tag', 'file', 'buffer', 'ultisnips', 'ternjs']
 let g:tern#command = ['tern']
 let g:tern#arguments = ['--persistent']
+
+let g:deoplete#sources#ternjs#types = 1
+let g:deoplete#enable_smart_case=1
 
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 
@@ -227,3 +270,18 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 let g:SuperTabClosePreviewOnPopupClose = 1
 " or just disable the preview entirely
 set completeopt-=preview
+
+" --- screen
+let g:ScreenImpl='Tmux'
+let g:ScreenShellInitialFocus='shell'
+
+" --- neoformat
+
+
+" --- multiple cursors
+func! Multiple_cursors_before()
+    call deoplete#init#_disable()
+endfunc
+func! Multiple_cursors_after()
+    call deoplete#init#_enable()
+endfunc
