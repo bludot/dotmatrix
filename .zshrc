@@ -4,11 +4,17 @@
 #  ~/.zsh/functions
 #  /usr/local/share/zsh/site-functions
 #)
-
+fpath=(
+  ~/.zsh/completion
+  /usr/local/share/zsh-completions
+  $fpath
+)
 
 
 export TERM="screen-256color"
+export EDITOR=nvim
 export NVM_DIR="$HOME/.nvm"
+export NVM_LAZY_LOAD=true
 export SPACESHIP_CHAR_SYMBOL="❯"
 export SPACESHIP_CHAR_SUFFIX=" "
  #color term
@@ -128,6 +134,47 @@ zplug "jhawthorn/fzy", \
 #       tag described in the next section
 
 zplug 'denysdovhan/spaceship-prompt', defer:3, use:'spaceship.zsh', from:github, as:theme
+
+
+# SPACESHIP_PROMPT_ORDER=(user host dir git node exec_time line_sep jobs exit_code char)
+
+SPACESHIP_PROMPT_ORDER=(
+#  time          # Time stampts section
+  user          # Username section
+  dir           # Current directory section
+  host          # Hostname section
+  git           # Git section (git_branch + git_status)
+#  hg            # Mercurial section (hg_branch  + hg_status)
+#  package       # Package version
+  node          # Node.js section
+#  ruby          # Ruby section
+#  elixir        # Elixir section
+#  xcode         # Xcode section
+#  swift         # Swift section
+#  golang        # Go section
+#  php           # PHP section
+#  rust          # Rust section
+#  haskell       # Haskell Stack section
+#  julia         # Julia section
+  docker        # Docker section
+  aws           # Amazon Web Services section
+#  venv          # virtualenv section
+#  conda         # conda virtualenv section
+#  pyenv         # Pyenv section
+#  dotnet        # .NET section
+#  ember         # Ember.js section
+#  kubecontext   # Kubectl context section
+  exec_time     # Execution time
+  line_sep      # Line break
+#  battery       # Battery level and status
+  vi_mode       # Vi-mode indicator
+  jobs          # Background jobs indicator
+  exit_code     # Exit code section
+  char          # Prompt character
+)
+
+
+
 # Set the priority when loading
 # e.g., zsh-syntax-highlighting must be loaded
 # after executing compinit command and sourcing other plugins
@@ -150,18 +197,16 @@ fi
 # Then, source plugins and add commands to $PATH
 zplug load
 
-# autoload =Uz compinit
-#if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
-#  compinit
-#else
-#  compinit -C
-#fi
-# autoload -U promptinit; promptinit
+autoload -Uz compinit
+if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
+  compinit
+else
+  compinit -C
+fi
+#autoload -U promptinit; promptinit
 # prompt spaceship
-# SPACESHIP_PROMPT_ORDER=(user host dir git node exec_time line_sep jobs exit_code char)
-
-# remove duplicates in $PATH
-typeset -aU path
+zstyle ':completion:*:*:docker:*' option-stacking yes
+zstyle ':completion:*:*:docker-*:*' option-stacking yes
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 
@@ -171,11 +216,20 @@ typeset -aU path
 # PERL_MB_OPT="--install_base \"/Users/jamestrotter/perl5\""; export PERL_MB_OPT;
 # PERL_MM_OPT="INSTALL_BASE=/Users/jamestrotter/perl5"; export PERL_MM_OPT;
 
+bindkey '^[[H' beginning-of-line
+bindkey '^[[F' end-of-line
+
 export PATH="/usr/local/opt/sqlite/bin:$PATH"
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # alias nvminit='export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"'
 
 # test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+export PATH="/usr/local/opt/openssl/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+export PATH="/usr/local/opt/gettext/bin:$PATH"
+# remove duplicates in $PATH
+typeset -aU path

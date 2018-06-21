@@ -68,13 +68,22 @@ else
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
 Plug 'pangloss/vim-javascript'
-" Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
-" Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'Galooshi/vim-import-js', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g import-js' }
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install', 'for': ['javascript', 'javascript.jsx'] }
+Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'heavenshell/vim-jsdoc'
 Plug 'mxw/vim-jsx'
+Plug 'maksimr/vim-jsbeautify'
+Plug 'mmalecki/vim-node.js'
+Plug 'neoclide/vim-jsx-improve'
+Plug 'othree/es.next.syntax.vim'
+Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'coffee', 'ls', 'typescript'] }
 Plug 'moll/vim-node'
-Plug 'groenewege/vim-less'
+Plug 'othree/yajs.vim'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-buffer.vim'
+
 " --- pull request reviewing?
 Plug 'junkblocker/patchreview-vim'
 Plug 'codegram/vim-codereview'
@@ -93,7 +102,7 @@ Plug 'flazz/vim-colorschemes'
 " --- tagbar related
 Plug 'majutsushi/tagbar'
 " Plug 'hushicai/tagbar-javascript.vim'
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'ludovicchabant/vim-gutentags'
 
 " Plug 'justincampbell/vim-eighties'
 Plug 'junegunn/vim-emoji'
@@ -101,6 +110,12 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 Plug 'ryanoasis/vim-devicons'
+
+" --- Code tools
+Plug 'retorillo/istanbul.vim'
+
+" --- Extras
+Plug 'junegunn/vim-xmark', { 'do': 'make' }
 
 " The following are examples of different formats supported.
 " Keep Plug commands between vundle#begin/end.
