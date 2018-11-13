@@ -1,365 +1,374 @@
 "===[ Personal Configuration Setup ]==="
-set nocompatible    "This fixes the problem where arrow keys do not function properly on some systems.
-set mouse=a         "Allows you to click around the text editor with your mouse to move the cursor
-set showmatch       "Highlights matching brackets in programming languages
-set autoindent      "If you're indented, new lines will also be indented
-set smartindent     "Automatically indents lines after opening a bracket in programming languages
-set backspace=2     "This makes the backspace key function like it does in other programs.
-set tabstop=2       "How much space Vim gives to a tab
-set number          "Enables line numbering
-set smarttab        "Improves tabbing
-set noexpandtab     "set Expand tab off"
-set shiftwidth=2    "Assists code formatting
-set foldmethod=manual  "Lets you hide sections of code
+set nocompatible      " This fixes the problem where arrow keys do not function properly on some systems.
+set mouse=a           " Allows you to click around the text editor with your mouse to move the cursor
+set showmatch         " Highlights matching brackets in programming languages
+set autoindent        " If you're indented, new lines will also be indented
+set smartindent       " Automatically indents lines after opening a bracket in programming languages
+set backspace=2       " This makes the backspace key function like it does in other programs.
+set tabstop=2         " How much space Vim gives to a tab
+set number            " Enables line numbering
+set smarttab          " Improves tabbing
+set shiftwidth=2      " Assists code formatting
+set expandtab         " set Expand tab off
+set foldmethod=manual " Lets you hide sections of code
 
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_ignore_case = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#enable_camel_case = 1
-let g:deoplete#enable_refresh_always = 1
-let g:deoplete#ignore_sources = {}
-let g:deoplete#omni#input_patterns = {}
-let g:deoplete#omni_patterns = {}
+
 
 " let nvmBin = system('echo $()')
 
-" --- ack
-let g:ackprg = 'ag --nogroup --column'
-
-" --- auto indent script
-nnoremap ,f :set tabstop=2 softtabstop=2 shiftwidth=2 noexpandtab<CR>
-" map ff  mzgg=G`z<CR>
-nmap <silent> fa :ALEFix<CR>
-nmap <silent> ff :Neoformat<CR>
-" vnoremap f =
-
-" --- Tab Commands
-nnoremap tn :tabnext<CR>
-nnoremap tp :tabprevious<CR>
-nnoremap `t :tabnew<CR>
-
-" --- Vim controlls
-inoremap jk <Esc>l
-nnoremap ;; :w<CR>
-nnoremap ;w :w<CR>
-nnoremap ;sp :split<CR>
-nnoremap ;vsp :vsplit<CR>
-nnoremap ;;q :bdelete<CR>
-nnoremap `p :set paste<CR>
-nnoremap `v :set nopaste<CR>
-nnoremap `m :set mouse=a<CR>
-nnoremap `n :set mouse-=a<CR>
-
-" --- Buffer Commands
-nnoremap <F5> :buffers<CR>:buffer<Space>
-nnoremap bn :bn<CR>
-nnoremap bp :bp<CR>
-
-"--- navigation commands
-map i <Up>
-map j <Left>
-map k <Down>
-noremap h i
-if !has('nvim')
-  set ttymouse=xterm2
-endif
-
-" let repohome=substitute(expand("~/.tags/")."".system("echo $(pwd) | tr -d \'\\/\' | tr -d \'\\n\'"), "\/", "\\\\/", "g")
-let repohome=expand("~/.tags/")."".system("echo $(pwd) | tr -d \'\\/\' | tr -d \'\\n\' | tr -d \'-\'")
-" === jsctags command === "
-" nnoremap <leader>jt :te find . -type f -iregex ".*\.js$" -not -path "./node_modules/*" -exec jsctags {} -f \; <bar> sed '/^$/d' <bar> sort > ~/.tags/$(echo $(pwd) <bar> -e 's/\//_/g' <bar> tr -d '\n')_tags <CR>
-nnoremap <leader>jt :te mkdir -p ~/.tags/$(echo $(pwd) <bar> tr -d '\/' <bar> tr -d '\n' <bar> tr -d '-') && find . -type f -iregex ".*\.js$" -not -path "./node_modules/*" -exec jsctags {} -f \; <bar> sed '/^$/d' <bar> sort > ~/.tags/$(echo $(pwd) <bar> tr -d '\/' <bar> tr -d '\n' <bar> tr -d '-')/tags <CR>
 
 
-" === Fold config === "
-" augroup vimrc
-"   au BufReadPre * setlocal foldmethod=indent
-"   au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
-" augroup END
-
-" --- If the .tags file exists, use it as a tags]
-" if !empty(glob(".tags"))
-" let &tags=repohome
-set tags=./tags,tags
-let &tags=repohome."/tags"
-" endif
-
-" autocmd VimEnter * echo substitute(fnamemodify(repohome2, ':p:h'), "\\(".repohome."/.\\{-}\/\\).*", "\\1tags;", "")
-" autocmd VimEnter * echo repohome
 
 "===[ Color Scheme Setup ]==="
-set t_Co=256            "Sets it to 256 color mode
-"colorscheme jellybeans  "Set ColorScheme to Jelly Beans
-" set background=dark
-set background=dark
-colorscheme gruvbox
-hi vertsplit ctermfg=238 ctermbg=235
-hi LineNr ctermfg=237
-hi StatusLine ctermfg=235 ctermbg=245
-hi StatusLineNC ctermfg=235 ctermbg=237
-hi Search ctermbg=58 ctermfg=15
-hi Default ctermfg=1
-hi clear SignColumn
-hi SignColumn ctermbg=235
-hi GitGutterAdd ctermbg=235 ctermfg=245
-hi GitGutterChange ctermbg=235 ctermfg=245
-hi GitGutterDelete ctermbg=235 ctermfg=245
-hi GitGutterChangeDelete ctermbg=235 ctermfg=245
-"let g:jellybeans_use_lowcolor_black = 0 "use Vim's grey instead of straight black background
-"let g:Powerline_symbols = 'fancy'
-set encoding=utf8
-set termencoding=utf8
-set fillchars=vert:\ ,stl:\ ,stlnc:\
-set laststatus=2
-set noshowmode
-hi clear CursorLine
-augroup CLClear
-    autocmd! ColorScheme * hi clear CursorLine
-augroup END
-" hi CursorLineNR cterm=bold
-augroup CLNRSet
-    autocmd! ColorScheme * hi CursorLineNR cterm=bold ctermbg=NONE ctermfg=NONE
-augroup END
-set cursorline
-"set guifont=Fira\ Mono\ for\ Powerline:h16
-"set guifont=Fura\ Mono\ Regular\ Nerd\ Font\ Complete:h16
-set guifont=Fura\ Code\ Retina\ Nerd\ Font\ Complete:h16
-"set guifont=FuraMonoNerdFontCM-Regular:h16
-"set guifont=DroidSansMono\ Nerd\ Font:h11
-"set guifont=Droid\ Sans\ Mono\ Nerd\ Font\ Complete\ Mono:h11
-"set guioptions-=T guioptions-=e guioptions-=L guioptions-=r
+  set t_Co=256            "Sets it to 256 color mode
+  " set background=dark
+  set background=dark
+  colorscheme gruvbox
+  hi vertsplit ctermfg=238 ctermbg=235
+  hi LineNr ctermfg=237
+  hi StatusLine ctermfg=235 ctermbg=245
+  hi StatusLineNC ctermfg=235 ctermbg=237
+  hi Search ctermbg=58 ctermfg=15
+  hi Default ctermfg=1
+  hi clear SignColumn
+  hi SignColumn ctermbg=235
+  hi GitGutterAdd ctermbg=235 ctermfg=245
+  hi GitGutterChange ctermbg=235 ctermfg=245
+  hi GitGutterDelete ctermbg=235 ctermfg=245
+  hi GitGutterChangeDelete ctermbg=235 ctermfg=245
+  " --- vim visual fixes --- "
+  set encoding=utf8
+  set termencoding=utf8
+  set fillchars=vert:\ ,stl:\ ,stlnc:\
+  set laststatus=2
+  set noshowmode
+  hi clear CursorLine
+  augroup CLClear
+      autocmd! ColorScheme * hi clear CursorLine
+  augroup END
+  " hi CursorLineNR cterm=bold
+  augroup CLNRSet
+      autocmd! ColorScheme * hi CursorLineNR cterm=bold ctermbg=NONE ctermfg=NONE
+  augroup END
+  set cursorline
+  set guifont=Fura\ Code\ Retina\ Nerd\ Font\ Complete:h16
 
-" === Functions === "
+"===[ Functions ]==="
 
-function! s:tern_go_to_def() abort
-  if exists(':TernDef')
-    TernDef
-  endif
-endfunction
+  function! s:tern_go_to_def() abort
+    if exists(':TernDef')
+      TernDef
+    endif
+  endfunction
+ 
+  "--- remove ternjs port file ---"
+    " kill -9 $(ps aux | grep -E 'node.+?tern' | awk '{print $2}') 
+    function! TernPrep()
+      if !empty(glob(join([getcwd(), ".tern-port"], "/")))
+        call delete(fnameescape(join([getcwd(), ".tern-port"], "/")))
+      endif
+    endfunction
+
+    autocmd VimEnter * :call TernPrep()
+    autocmd BufWritePost * :call TernPrep()
 
 
 "===[ Plugin Configuration ] ==="
-"
-" --- CTRL P
-set runtimepath^=~/.vim/bundle/ctrlp.vim
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 
-" --- Tagbar
-nmap <F7> :TagbarToggle<CR>
+  "===[ deoplete setup ]==="
 
-" --- NERDTree
-nmap <F8> :NERDTreeToggle<CR>
-" nmap <F8> :VimFilerExplorer<CR>
-" nmap gf :VimFilerExplorer -find<CR>
-nmap gf :NERDTreeFind<CR>
-let NERDTreeMapOpenInTab='\r'
-let g:nerdtree_tabs_focus_on_files = 1
-" let g:nerdtree_tabs_autofind = 1
-let g:NERDTreeMapOpenInTab = '<2-LeftMouse>'
-"let NERDTreeMapOpenInTab='<ENTER>'
+    let g:deoplete#enable_at_startup = 1
+    let g:deoplete#enable_ignore_case = 1
+    let g:deoplete#enable_smart_case = 1
+    " let g:deoplete#enable_camel_case = 1
+    let g:deoplete#enable_refresh_always = 1
+    " let g:deoplete#ignore_sources = {}
+    " let g:deoplete#omni_patterns = {}
+    " --- menu styles --- "
+    " highlight Pmenu ctermbg=8 guibg=#606060
+    " highlight PmenuSel ctermbg=1 guifg=#dddd00 guibg=#1f82cd
+    " highlight PmenuSbar ctermbg=0 guibg=#d6d6d6
 
-" --- VimFilerExplorer
-let g:vimfiler_tree_leaf_icon = ' '
-let g:vimfiler_tree_opened_icon = '▾'
-let g:vimfiler_tree_closed_icon = '▸'
-let g:vimfiler_file_icon = ' '
-let g:vimfiler_marked_file_icon = '*'
+  "===[ echodoc ]==="
+    set cmdheight=2
+    let g:echodoc#enable_at_startup = 1
 
-" --- Syntastic
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
+  "===[ NeoSnippet ]==="
+    let g:neosnippet#enable_completed_snippet = 1
 
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-" let g:syntastic_javascript_checkers = ['eslint']
-" let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
+  "===[emoji completion?]==="
 
-" --- ale
-let g:ale_lint_on_save = 1
-let g:ale_sign_error = '✖'
-let g:ale_sign_warning = '➤'
-let g:ale_sign_info = '🛈'
-let g:ale_echo_msg_format = '%severity%: %linter%: %s'
-let g:ale_lint_on_text_changed = 'always'
-let g:ale_lint_delay = 750
-let g:ale_lint_on_insert_leave = 1
-highlight link ALEErrorSign GruvboxRedSign
-highlight link ALEWarningSign GruvboxYellowSign
-" let g:ale_linters_explicit = 1
-let g:ale_javascript_eslint_use_global = 0
-" let g:ale_javascript_eslint_executable = './node_modules/.bin/eslint'
-" let g:ale_javascript_eslint_options = system('echo "--config $(dirname \"$0\")/package.json"')
-" let g:ale_javascript_eslint_suppress_missing_config = 0
-let g:ale_json_jq_executable = '/usr/local/bin/jq'
-let g:ale_linters = {
-\  'json': ['prettier'],
-\  'jsx': ['stylelint', 'eslint'],
-\  'javascript': ['eslint'],
-\}
-" let g:ale_linter_aliases = {'jsx': 'css'}
-let g:ale_fixers = {
-\  'jsx': ['stylelint', 'eslint'],
-\  'javascript': ['eslint'],
-\  'javascript.jsx': ['eslint'],
-\}
-nmap <silent> <C-k> <Plug>(ale_previous)
-nmap <silent> <C-j> <Plug>(ale_next)
-nmap <silent> <C-K> <Plug>(ale_previous_wrap)
-nmap <silent> <C-J> <Plug>(ale_next_wrap)
-nmap <silent> <C-h> <Plug>(ale_hover)
+    set completefunc=emoji#complete
 
-" --- Airline
-let g:airline_theme='powerlineish'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-let g:airline#extensions#ale#enabled = 1
+  "===[ CTRL P ]==="
 
-let g:airline_theme_patch_func = 'AirlineThemePatch'
-function! AirlineThemePatch(palette)
-  if g:airline_theme == 'powerlineish'
-    let i = 0
-    let a:palette.normal.airline_c = ['#ffffff', '#121212', 231, 235, '']
-    let a:palette.normal.airline_x = ['#9e9e9e', '#303030', 247, 236]
-    let a:palette.insert.airline_c = ['#87d7ff', '#005f87', 117, 235, '']
-    for colors in values(a:palette.normal)
-      if i == 0
-"        let colors[3] = 243
+  set runtimepath^=~/.vim/bundle/ctrlp.vim
+  let g:ctrlp_working_path_mode = 'ra'
+  let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+
+  "===[ Tagbar ]==="
+    nmap <F7> :TagbarToggle<CR>
+
+  "===[ NERDTree ]==="
+    nmap <F8> :NERDTreeToggle<CR>
+    " nmap <F8> :Defx -direction=topleft -split=vertical -winwidth=35 -toggle<CR>
+    nmap gf :NERDTreeFind<CR>
+    let NERDTreeMapOpenInTab='\r'
+    let g:nerdtree_tabs_focus_on_files = 1
+    " let g:nerdtree_tabs_autofind = 1
+    let g:NERDTreeMapOpenInTab = '<2-LeftMouse>'
+    " let NERDTreeMapOpenInTab='<ENTER>'
+
+  "===[ ale ]==="
+    let g:ale_lint_on_save = 1
+    let g:ale_sign_error = '✖'
+    let g:ale_sign_warning = '➤'
+    let g:ale_sign_info = '🛈'
+    let g:ale_echo_msg_format = '%severity%: %linter%: %s'
+    let g:ale_lint_on_text_changed = 'always'
+    let g:ale_lint_delay = 750
+    let g:ale_lint_on_insert_leave = 1
+    highlight link ALEErrorSign GruvboxRedSign
+    highlight link ALEWarningSign GruvboxYellowSign
+    " let g:ale_linters_explicit = 1
+    let g:ale_javascript_eslint_use_global = 0
+    let g:ale_json_jq_executable = '/usr/local/bin/jq'
+    let g:ale_linters = {
+    \  'json': ['prettier'],
+    \  'jsx': ['stylelint', 'eslint'],
+    \  'javascript': ['eslint'],
+    \}
+    " let g:ale_linter_aliases = {'jsx': 'css'}
+    let g:ale_fixers = {
+    \  'jsx': ['stylelint', 'eslint'],
+    \  'javascript': ['eslint'],
+    \  'javascript.jsx': ['eslint'],
+    \}
+    nmap <silent> <C-k> <Plug>(ale_previous)
+    nmap <silent> <C-j> <Plug>(ale_next)
+    nmap <silent> <C-K> <Plug>(ale_previous_wrap)
+    nmap <silent> <C-J> <Plug>(ale_next_wrap)
+    nmap <silent> <C-h> <Plug>(ale_hover)
+
+  "===[ Airline ]==="
+    let g:airline_theme='powerlineish'
+    let g:airline_powerline_fonts = 1
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+    let g:airline#extensions#ale#enabled = 1
+
+    let g:airline_theme_patch_func = 'AirlineThemePatch'
+    function! AirlineThemePatch(palette)
+      if g:airline_theme == 'powerlineish'
+        let i = 0
+        let a:palette.normal.airline_c = ['#ffffff', '#121212', 231, 235, '']
+        let a:palette.normal.airline_x = ['#9e9e9e', '#303030', 247, 236]
+        let a:palette.insert.airline_c = ['#87d7ff', '#005f87', 117, 235, '']
+        for colors in values(a:palette.normal)
+          if i == 0
+            " let colors[3] = 243
+          endif
+          let i += 1
+        endfor
       endif
-      let i += 1
-    endfor
-  endif
-endfunction
+    endfunction
 
 
-" --- devicons
-let g:webdevicons_enable = 1
-let g:webdevicons_enable_nerdtree = 1
-let g:WebDevIconsUnicodeGlyphDoubleWidth = 0
-let g:webdevicons_conceal_nerdtree_brackets = 1
-let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
-let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-let g:DevIconsEnableFoldersOpenClose = 1
+  "===[ devicons ]==="
+    let g:webdevicons_enable = 1
+    let g:webdevicons_enable_nerdtree = 1
+    let g:WebDevIconsUnicodeGlyphDoubleWidth = 0
+    let g:webdevicons_conceal_nerdtree_brackets = 1
+    let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
+    let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+    let g:DevIconsEnableFoldersOpenClose = 1
 
-" --- identguide
-let g:indentLine_color_term = 239
+  "===[ identLine ]==="
+    let g:indentLine_color_term = 239
+    let g:indentLine_char = '▏'
 
+  "===[ vim javascript ]==="
+    let g:javascript_plugin_jsdoc = 1
+    let g:javascript_plugin_flow = 1
 
-" --- vim emoji stuff
-set completefunc=emoji#complete
-
-" --- vim jsx
-let g:jsx_ext_required = 0
-
-" --- vim javascript
-let g:javascript_plugin_jsdoc = 1
-let g:javascript_plugin_flow = 1
-
-" --- vim-jsdoc
-" Allow prompt for interactive input.
-let g:jsdoc_allow_input_prompt = 1
-
-" Prompt for a function description
-let g:jsdoc_input_description = 1
-
-" Set value to 1 to turn on detecting underscore starting functions as private convention
-let g:jsdoc_underscore_private = 1
-
-" Enable to use ECMAScript6's Shorthand function, Arrow function.
-let g:jsdoc_enable_es6 = 1
-
-" --- vim-conflicted
-
-set stl+=%{ConflictedVersion()}
-
-" --- gutentags
-" let g:gutentags_cache_dir="~/.gutentags_cache_dir"
-" set statusline+=%{gutentags#statusline('[Generating...]')}
-" let g:gutentags_debug=1
-" let g:gutentags_define_advanced_commands=1
-" let g:gutentags_ctags_auto_set_tags=1
-" let g:gutentags_ctags_exclude=[
-"       \ 'node_modules',
-"       \ ]
-
-" --- tern for vim
-let g:tern_show_argument_hints="on_move"
-
-" --- deoplete
-let g:deoplete#ignore_sources.markdown = ['tag']
-let g:deoplete#ignore_sources.javascript = ['omni']
-call deoplete#custom#source('ternjs', 'mark', 'tern')
-call deoplete#custom#source('ternjs', 'rank', 9999)
-let g:deoplete#ignore_sources.typescript = ['tag','omni', 'syntax']
-
-let g:deoplete#omni#input_patterns.gitcommit = [
-      \'[ ]#[ 0-9a-zA-Z]*',
-      \]
-let g:deoplete#ignore_sources.gitcommit = ['neosnippet']
-
-let g:deoplete#ignore_sources.vim = ['tag']
-" let g:deoplete#enable_at_startup = 1
-" let g:deoplete#omni#functions = {}
-" let g:deoplete#omni#functions.javascript = [
-"  \ 'tern#Complete',
-"  \ 'jspc#omni'
-" \]
-" let g:deoplete#omni#functions = {}
-" let g:deoplete#omni#functions.javascript = [
-"  \ 'tern#Complete',
-"  \ 'jspc#omni'
-" \]
-
-" set completeopt=longest,menuone,preview
-" let g:deoplete#sources = {}
-" let g:deoplete#sources['javascript.jsx'] = ['tag', 'file', 'buffer', 'ultisnips', 'ternjs']
-" let g:tern#command = ['tern']
-" let g:tern#arguments = ['--persistent']
-
-" let g:deoplete#sources#ternjs#types = 1
-" let g:deoplete#enable_smart_case=1
-
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-
-autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
-let g:UltiSnipsExpandTrigger="<C-j>"
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
-" close the preview window when you're not using it
-let g:SuperTabClosePreviewOnPopupClose = 1
-" or just disable the preview entirely
-set completeopt-=preview
-
-" --- screen
-let g:ScreenImpl='Tmux'
-let g:ScreenShellInitialFocus='shell'
-
-" --- neoformat
-"let g:neoformat_verbose = 1
-"let g:neoformat_javascript_custom = {
-"      \ 'exe': 'eslint_d',
-"      \ 'args': ["-c".expand('./package.json'), '--stdin','--fix-to-stdout'],
-"      \ 'stdin': 1,
-"      \ }
-
-"let g:neoformat_enabled_javascript = ['custom', 'eslint_d']
-let g:neoformat_enabled_javascript = ['eslint_d']
-" --- multiple cursors
-func! Multiple_cursors_before()
-    call deoplete#init#_disable_handler()
-endfunc
-func! Multiple_cursors_after()
-    call deoplete#init#_enable_handler()
-endfunc
+  "===[ vim-jsdoc ]==="
+    let g:jsdoc_allow_input_prompt = 1 " Allow prompt for interactive input.
+    let g:jsdoc_input_description = 1  " Prompt for a function description
+    let g:jsdoc_underscore_private = 1 " Set value to 1 to turn on detecting underscore starting functions as private convention
+    let g:jsdoc_enable_es6 = 1         " Enable to use ECMAScript6's Shorthand function, Arrow function.
 
 
-" --- asyncomplete
+  " --- gutentags
+  " let g:gutentags_cache_dir="~/.gutentags_cache_dir"
+  " set statusline+=%{gutentags#statusline('[Generating...]')}
+  " let g:gutentags_debug=1
+  " let g:gutentags_define_advanced_commands=1
+  " let g:gutentags_ctags_auto_set_tags=1
+  " let g:gutentags_ctags_exclude=[
+  "       \ 'node_modules',
+  "       \ ]
 
-let g:asyncomplete_remove_duplicates = 1
+  "===[ deoplete ]==="
+    let g:deoplete#sources#ternjs#types = 1
+    let g:deoplete#sources#ternjs#depths = 1
+    let g:deoplete#sources#ternjs#docs = 1
+    " let g:deoplete#ignore_sources.markdown = ['tag']
+    " let g:deoplete#ignore_sources.javascript = ['omni']
+    " call deoplete#custom#source('ternjs', 'mark', 'tern')
+    " call deoplete#custom#source('ternjs', 'rank', 9999)
+    " let g:deoplete#ignore_sources.typescript = ['tag','omni', 'syntax']
 
-" --- nyc coverage
-let g:istanbul#jsonPath = ['coverage/coverage-final.json', 'coverage/coverage.json']
+    " let g:deoplete#omni#input_patterns.gitcommit = [
+    "       \'[ ]#[ 0-9a-zA-Z]*',
+    "       \]
+    " let g:deoplete#ignore_sources.gitcommit = ['neosnippet']
+
+    " let g:deoplete#ignore_sources.vim = ['tag']
+
+
+
+
+
+
+    " let g:deoplete#enable_at_startup = 1
+    " let g:deoplete#omni#functions = {}
+    " let g:deoplete#omni#functions.javascript = [
+    "  \ 'tern#Complete',
+    "  \ 'jspc#omni'
+    " \]
+    " let g:deoplete#omni#functions = {}
+    " let g:deoplete#omni#functions.javascript = [
+    "  \ 'tern#Complete',
+    "  \ 'jspc#omni'
+    " \]
+
+    set completeopt=longest,menuone,preview
+
+
+    let g:UltiSnipsExpandTrigger="<C-j>"
+    inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+    " close the preview window when you're not using it
+    let g:SuperTabClosePreviewOnPopupClose = 1
+    " or just disable the preview entirely
+    set completeopt-=preview
+
+  "===[ screen ]==="
+    let g:ScreenImpl='Tmux'
+    let g:ScreenShellInitialFocus='shell'
+
+  "===[ neoformat ]==="
+    let g:neoformat_enabled_javascript = ['eslint_d', 'prettier-eslint', 'prettier-eslint-cli']
+
+  "===[ multiple cursors ]==="
+    func! Multiple_cursors_before()
+        call deoplete#init#_disable_handler()
+    endfunc
+    func! Multiple_cursors_after()
+        call deoplete#init#_enable_handler()
+    endfunc
+
+  "===[ ack ]==="
+    let g:ackprg = 'ag --nogroup --column'
+
+  "===[ Coverage.vim ]==="
+    if !empty(glob(join([getcwd(), "coverage/coverage.json"], "/")))
+      let g:coverage_json_report_path = 'coverage/coverage.json'
+    elseif !empty(glob(join([getcwd(), "coverage/coverage-final.json"], "/")))
+      let g:coverage_json_report_path = 'coverage/coverage-final.json'
+    endif
+    let g:coverage_sign_covered = '⦿'
+    let g:coverage_sign_uncovered = '○'
+    let g:coverage_interval = 5000
+    let g:coverage_show_covered = 1
+    let g:coverage_show_uncovered = 1
+    
+
+
+
+"===[ keybindings for plugins ]==="
+
+  " --- Defx keybindings --- "
+    autocmd FileType defx call s:defx_my_settings()
+      function! s:defx_my_settings() abort
+        " Define mappings
+        nnoremap <silent><buffer><expr> <CR>
+        \ defx#do_action('open')
+        nnoremap <silent><buffer><expr> c
+        \ defx#do_action('copy')
+        nnoremap <silent><buffer><expr> m
+        \ defx#do_action('move')
+        nnoremap <silent><buffer><expr> p
+        \ defx#do_action('paste')
+        nnoremap <silent><buffer><expr> l
+        \ defx#do_action('open')
+        nnoremap <silent><buffer><expr> E
+        \ defx#do_action('open', 'vsplit')
+        nnoremap <silent><buffer><expr> P
+        \ defx#do_action('open', 'pedit')
+        nnoremap <silent><buffer><expr> K
+        \ defx#do_action('new_directory')
+        nnoremap <silent><buffer><expr> N
+        \ defx#do_action('new_file')
+        nnoremap <silent><buffer><expr> d
+        \ defx#do_action('remove')
+        nnoremap <silent><buffer><expr> r
+        \ defx#do_action('rename')
+        nnoremap <silent><buffer><expr> x
+        \ defx#do_action('execute_system')
+        nnoremap <silent><buffer><expr> .
+        \ defx#do_action('toggle_ignored_files')
+        nnoremap <silent><buffer><expr> h
+        \ defx#do_action('cd', ['..'])
+        nnoremap <silent><buffer><expr> ~
+        \ defx#do_action('cd')
+        nnoremap <silent><buffer><expr> q
+        \ defx#do_action('quit')
+        nnoremap <silent><buffer><expr> <Space>
+        \ defx#do_action('toggle_select') . 'j'
+        nnoremap <silent><buffer><expr> *
+        \ defx#do_action('toggle_select_all')
+        nnoremap <silent><buffer><expr> j
+        \ line('.') == line('$') ? 'gg' : 'j'
+        nnoremap <silent><buffer><expr> k
+        \ line('.') == 1 ? 'G' : 'k'
+        nnoremap <silent><buffer><expr> <C-l>
+        \ defx#do_action('redraw')
+        nnoremap <silent><buffer><expr> <C-g>
+        \ defx#do_action('print')
+      endfunction
+
+
+  " --- linter/formatters --- "
+    nmap <silent> fa :ALEFix<CR>
+    nmap <silent> ff :Neoformat<CR>
+
+  " --- Tab Commands --- "
+    nnoremap tn :tabnext<CR>
+    nnoremap tp :tabprevious<CR>
+    nnoremap `t :tabnew<CR>
+
+  " --- navigation commands --- "
+    map i <Up>
+    map j <Left>
+    map k <Down>
+    if !has('nvim')
+      set ttymouse=xterm2
+    endif
+
+  " --- Deol --- "
+    nnoremap <C-c> :Deol -split<CR>
+
+  " --- tags --- "
+    " let repohome=substitute(expand("~/.tags/")."".system("echo $(pwd) | tr -d \'\\/\' | tr -d \'\\n\'"), "\/", "\\\\/", "g")
+    let repohome=expand("~/.tags/")."".system("echo $(pwd) | tr -d \'\\/\' | tr -d \'\\n\' | tr -d \'-\'")
+    " === jsctags command === "
+    " nnoremap <leader>jt :te find . -type f -iregex ".*\.js$" -not -path "./node_modules/*" -exec jsctags {} -f \; <bar> sed '/^$/d' <bar> sort > ~/.tags/$(echo $(pwd) <bar> -e 's/\//_/g' <bar> tr -d '\n')_tags <CR>
+    nnoremap <leader>jt :te mkdir -p ~/.tags/$(echo $(pwd) <bar> tr -d '\/' <bar> tr -d '\n' <bar> tr -d '-') && find . -type f -iregex ".*\.js$" -not -path "./node_modules/*" -exec jsctags {} -f \; <bar> sed '/^$/d' <bar> sort > ~/.tags/$(echo $(pwd) <bar> tr -d '\/' <bar> tr -d '\n' <bar> tr -d '-')/tags <CR>
+    " --- If the .tags file exists, use it as a tags]
+    " if !empty(glob(".tags"))
+    " let &tags=repohome
+    set tags=./tags,tags
+    let &tags=repohome."/tags"
+    " endif
+
+

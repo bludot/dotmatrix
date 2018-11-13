@@ -1,9 +1,3 @@
-set -g prefix C-b
-
-unbind-key C-a
-bind-key C-b send-prefix
-
-set-option -g mouse on
 
 bind | split-window -h
 
