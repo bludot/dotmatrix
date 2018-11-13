@@ -4,118 +4,147 @@ filetype off                  " required
 " set the runtime path to include Vundle and initialize
 set rtp+=/usr/local/opt/fzf
 call plug#begin('~/.vim/plugged')
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+
+"===[ Vim design ]==="
+
+  " --- colorschemes --- "
+    " Plug 'nanotech/jellybeans.vim'
+    " Plug 'altercation/vim-colors-solarized'
+    " Plug 'jdkanani/vim-material-theme'
+    Plug 'flazz/vim-colorschemes'                                                                                  "  colorschemes for vim
+
+  " --- icons --- "
+    Plug 'ryanoasis/vim-devicons'                                                                                  "  icons for files
+
+  " --- status bar (top and bottom) --- "
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+
+  " --- denite vim UI --- "
+    Plug 'Shougo/denite.nvim'                                                                                      "  🐉 Dark powered asynchronous unite all interfaces for Neovim/Vim8
+
+  " --- Other goodies --- "
+    Plug 'junegunn/vim-emoji'                                                                                      "  emoji in vim (not working)
+    Plug 'tpope/vim-eunuch'                                                                                        "  Vim sugar for the UNIX shell commands
+    Plug 'Shougo/deol.nvim'
 
 
-Plug 'Lokaltog/powerline', {'rtp': '$HOME/Library/Python/3.6/lib/python/site-packages/powerline/bindings/vim/'}
+"===[ Vim editor helpers ]==="
 
-Plug 'ervandew/supertab'
-Plug 'godlygeek/tabular'
-Plug 'gregsexton/gitv'
-Plug 'leshill/vim-json'
-Plug 'rondale-sc/vim-spacejam'
-Plug 'chiel92/vim-autoformat'
-Plug 'sbdchd/neoformat'
-Plug 'prettier/vim-prettier', {
-    \ 'do': 'npm install',
-    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss'] }
-Plug 'tpope/vim-eunuch'
+  Plug 'tpope/vim-sensible'                                                                                        "  sensible key bindings
+  Plug 'terryma/vim-multiple-cursors'                                                                              "  multiple cursors (ctrl+n after selecting)
+  Plug 'yuttie/comfortable-motion.vim'                                                                             "  Brings physics-based smooth scrolling to the Vim world!
+  Plug 'ervandew/screen'                                                                                           "  Simulate a split shell in vim using gnu screen or tmux<Paste>
+  Plug 'tpope/vim-obsession'                                                                                       "  session files updated
+  Plug 'tpope/vim-commentary'                                                                                      "  Add comments block wise
 
-" --- git related pplugins
-Plug 'tpope/vim-fugitive'
-Plug 'christoomey/vim-conflicted'
-Plug 'tpope/vim-git'
+  " --- tabs --- "
+    Plug 'ervandew/supertab'                                                                                       "  vim plugin which allows you to use <Tab> for all your insert completion needs
+    Plug 'godlygeek/tabular'                                                                                       "  Vim script for text filtering and alignment
+    Plug 'Yggdroot/indentLine'                                                                                     "  A vim plugin to display the indention levels with thin vertical lines
 
-Plug 'tpope/vim-markdown'
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-sleuth'
-Plug 'tpope/vim-speeddating'
-Plug 'tpope/vim-surround'
-" --- file manager
-Plug 'scrooloose/nerdtree'
-" Plug 'Shougo/vimfiler.vim'
-if has('nvim')
-  Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/defx.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
+  " --- searching --- "
+    Plug 'dyng/ctrlsf.vim'                                                                                         "  search in files for text
+    Plug 'ctrlpvim/ctrlp.vim'                                                                                      "  fuzzy search
+    Plug 'junegunn/fzf.vim'                                                                                        "  fzf support for vim (fuzzy search/matching/whatever)
+    Plug 'mileszs/ack.vim'                                                                                         "  fuzzy search with ack
+
+  " --- file manager --- "
+    Plug 'scrooloose/nerdtree'                                                                                     "  file manager
+    if has('nvim')
+      Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }                                                    "  file manager using denite
+    else
+      Plug 'Shougo/defx.nvim'
+      Plug 'roxma/nvim-yarp'
+      Plug 'roxma/vim-hug-neovim-rpc'
+    endif
 
 
-Plug 'Shougo/unite.vim'
-Plug 'Shougo/denite.nvim'
-Plug 'fatih/vim-go'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'airblade/vim-gitgutter'
-" Plug 'jsx/jsx.vim'
-Plug 'w0rp/ale'
-Plug 'ervandew/screen'
 
-Plug 'Yggdroot/indentLine'
-" Plug 'breuckelen/vim-resize'
-Plug 'junegunn/fzf.vim'
-Plug 'mileszs/ack.vim'
+"===[ Code helpers ]==="
 
-" --- javascript
-" --- --- autocomplete
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-Plug 'pangloss/vim-javascript'
-Plug 'Galooshi/vim-import-js', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g import-js' }
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install', 'for': ['javascript', 'javascript.jsx'] }
-Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'heavenshell/vim-jsdoc'
-Plug 'mxw/vim-jsx'
-Plug 'maksimr/vim-jsbeautify'
-Plug 'mmalecki/vim-node.js'
-Plug 'neoclide/vim-jsx-improve'
-Plug 'othree/es.next.syntax.vim'
-Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'coffee', 'ls', 'typescript'] }
-Plug 'moll/vim-node'
-Plug 'othree/yajs.vim'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-buffer.vim'
+  " --- code tagging --- "
+    Plug 'majutsushi/tagbar'                                                                                       "  code tags
+    " Plug 'hushicai/tagbar-javascript.vim'
+    " Plug 'ludovicchabant/vim-gutentags'
 
-" --- pull request reviewing?
-Plug 'junkblocker/patchreview-vim'
-Plug 'codegram/vim-codereview'
+  " --- auto completion --- "
+    if has('nvim')
+      Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    else
+      Plug 'Shougo/deoplete.nvim'
+      Plug 'roxma/nvim-yarp'
+      Plug 'roxma/vim-hug-neovim-rpc'
+    endif
 
-" --- editor tools
-Plug 'terryma/vim-multiple-cursors'
-Plug 'dyng/ctrlsf.vim'
-Plug 'yuttie/comfortable-motion.vim'
+  " --- Generic Linter --- "
+    Plug 'w0rp/ale'                                                                                                "  code linter
 
-" --- colorschemes
-" Plug 'nanotech/jellybeans.vim'
-" Plug 'altercation/vim-colors-solarized'
-" Plug 'jdkanani/vim-material-theme'
-Plug 'flazz/vim-colorschemes'
+  " --- Code formating --- "
+    Plug 'sbdchd/neoformat'                                                                                        "  format code
 
-" --- tagbar related
-Plug 'majutsushi/tagbar'
-" Plug 'hushicai/tagbar-javascript.vim'
-" Plug 'ludovicchabant/vim-gutentags'
+  " --- Code Coverage --- "
+    Plug 'ruanyl/coverage.vim'                                                                                     " Code coverage (with lcov)
 
-" Plug 'justincampbell/vim-eighties'
-Plug 'junegunn/vim-emoji'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 
-Plug 'ryanoasis/vim-devicons'
 
-" --- Code tools
-Plug 'retorillo/istanbul.vim'
+"===[ git related plugins ]==="
 
-" --- Extras
-Plug 'junegunn/vim-xmark', { 'do': 'make' }
+  Plug 'tpope/vim-fugitive'                                                                                        "  A Git wrapper so awesome, it should be illegal
+  Plug 'gregsexton/gitv'                                                                                           "  see commit changes
+  Plug 'airblade/vim-gitgutter'                                                                                    "  gutter showing git changes
+
+  " --- pull request reviewing?
+    Plug 'junkblocker/patchreview-vim'
+    Plug 'codegram/vim-codereview'
+
+
+
+"===[ Code syntax ]==="
+
+  Plug 'leshill/vim-json', { 'for': 'json' }                                                                       "  json for vim
+  Plug 'fatih/vim-go', { 'for': ['go', 'golang'] }                                                                 "  go for vim
+  Plug 'tmux-plugins/vim-tmux'                                                                                     "  syntax for tmux configs
+
+
+
+"===[ Language Specific ]==="
+
+  "===[ Markdown ]==="
+
+    " --- syntax --- "
+      Plug 'tpope/vim-markdown', { 'for': 'markdown' }                                                             "  markdown in vim
+
+    " --- plugins --- "
+      Plug 'junegunn/vim-xmark', { 'do': 'make', 'for': 'markdown' }                                               "  view markdown in browser
+
+  "===[ Javascript ]==="
+
+    " --- syntax --- "
+      Plug 'pangloss/vim-javascript'
+      Plug 'leafgarland/typescript-vim'
+      Plug 'maxmellon/vim-jsx-pretty'
+      Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+
+    " --- code completion --- "
+      Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern', 'for': ['javascript', 'javascript.jsx'] }    "  ternjs for code completion
+      Plug 'wokalski/autocomplete-flow', { 'do': 'npm install -g flow-bin' }                                       "  Neovim and vim Flow autocompletion for deoplete + neosnippet
+      " For func argument completion
+      Plug 'Shougo/neosnippet'
+      Plug 'Shougo/neosnippet-snippets'
+      Plug 'Shougo/echodoc.vim'
+      " Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }                                        "  jspc code completion
+      " Plug 'prabirshrestha/asyncomplete.vim'
+      " Plug 'prabirshrestha/asyncomplete-buffer.vim'
+
+    " --- plugins to help code --- "
+      Plug 'Galooshi/vim-import-js', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g import-js' } "  import js files
+      Plug 'heavenshell/vim-jsdoc'                                                                                 "  jsdoc helper
+
+    " --- formatters/prettiers --- "
+      " Plug 'prettier/vim-prettier', {
+      "     \ 'do': 'npm install',
+      "     \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss'] }
 
 " The following are examples of different formats supported.
 " Keep Plug commands between vundle#begin/end.

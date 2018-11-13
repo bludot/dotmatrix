@@ -43,3 +43,6 @@ alias whatsmyip="wget http://ipinfo.io/ip -qO -"
 [ ! -f "$HOME/.bashrc.local" ] || . "$HOME/.bashrc.local"
 
 
+
+# added by travis gem
+[ -f /Users/jamestrotter/.travis/travis.sh ] && source /Users/jamestrotter/.travis/travis.sh
