@@ -12,6 +12,9 @@ call plug#begin('~/.vim/plugged')
     " Plug 'altercation/vim-colors-solarized'
     " Plug 'jdkanani/vim-material-theme'
     Plug 'flazz/vim-colorschemes'                                                                                  "  colorschemes for vim
+    Plug 'ayu-theme/ayu-vim'
+    Plug 'reedes/vim-colors-pencil'
+    Plug 'atelierbram/Base2Tone-vim'
 
   " --- icons --- "
     Plug 'ryanoasis/vim-devicons'                                                                                  "  icons for files
