@@ -15,6 +15,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'ayu-theme/ayu-vim'
     Plug 'reedes/vim-colors-pencil'
     Plug 'atelierbram/Base2Tone-vim'
+    Plug 'chriskempson/base16-vim'
 
   " --- icons --- "
     Plug 'ryanoasis/vim-devicons'                                                                                  "  icons for files
