@@ -40,6 +40,8 @@ alias whatsmyip="wget http://ipinfo.io/ip -qO -"
 
 #export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 
+export PATH="/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/usr/local/git/bin:$PATH"
+
 [ ! -f "$HOME/.bashrc.local" ] || . "$HOME/.bashrc.local"
 
 xrdb ~/.Xresources
