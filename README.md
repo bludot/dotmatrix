@@ -34,6 +34,12 @@ This script symlinks all dotfiles into your home directory.
 $HOME directory. If you have, e.g. your own .bashrc file, you can move it to
 ~/.bashrc.local, and dotmatrix will source it for you.
 
+
+There is also a server__setup.sh script that will install all packages and 
+add the dotfiles.
+
+[here](https://gist.github.com/bludot/e9d14dbbb3a67252b5177f6726ec7e53)
+
 Partial Installation
 --------------------
 
@@ -54,27 +60,6 @@ want to ignore all of the rest of dotmatrix's dotfiles:
     .sharedrc
     $ bin/install # Only installs .tmux.conf and .sharedrc
 
-Vim bundles
------------
-
-For Vim users, there's another script you might want to run, after you've run
-bin/install:
-
-	$ bin/vimbundles.sh
-
-This will install the set of Vim bundles we use.
-
-After you've done ./bin/install, you'll have a .vimbundle file and this is a
-manifest of sorts that the vimbundles.sh script will use to install various vim
-plugins. If you have other plugins that you like that aren't on this list, you
-can put them in a ~/.vimbundle.local and that will be installed secondarily.
-
-The ~/.vimbundle.local file should include one plugin per line, each having the
-following format:
-
-	github-user/repo-name
-
-You need not include a trailing `.git`.
 
 Actively Maintained
 -------------------
