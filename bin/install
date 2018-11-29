@@ -26,6 +26,18 @@ for dotfile in .*.local ; do
     skip_notice $dotfile "exists"
   fi
 done
+# Copy .config/* files
+for configdir in .config/* ; do
+  dotmatrix_path=$PWD/$configdir
+  path="$HOME/$configdir"
+
+  if [ ! -e $path ]; then
+    copy_notice $configdir "absent"
+    cp -r $dotmatrix_path $path
+  else
+    skip_notice $configdir "exists"
+  fi
+done
 
 for dotfile in $(./bin/file_list.sh); do
   dotmatrix_path="$PWD/$dotfile"
