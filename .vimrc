@@ -131,8 +131,8 @@ call plug#begin('~/.vim/plugged')
       Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 
     " --- code completion --- "
-      Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern', 'for': ['javascript', 'javascript.jsx'] }    "  ternjs for code completion
-      Plug 'wokalski/autocomplete-flow', { 'do': 'npm install -g flow-bin' }                                       "  Neovim and vim Flow autocompletion for deoplete + neosnippet
+      Plug 'carlitux/deoplete-ternjs', { 'do': 'yarn global add tern', 'for': ['javascript', 'javascript.jsx'] }    "  ternjs for code completion
+      Plug 'wokalski/autocomplete-flow', { 'do': 'yarn global add flow-bin' }                                       "  Neovim and vim Flow autocompletion for deoplete + neosnippet
       " For func argument completion
       Plug 'Shougo/neosnippet'
       Plug 'Shougo/neosnippet-snippets'
@@ -142,7 +142,7 @@ call plug#begin('~/.vim/plugged')
       " Plug 'prabirshrestha/asyncomplete-buffer.vim'
 
     " --- plugins to help code --- "
-      Plug 'Galooshi/vim-import-js', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g import-js' } "  import js files
+      Plug 'Galooshi/vim-import-js', { 'for': ['javascript', 'javascript.jsx'], 'do': 'yarn global add import-js' } "  import js files
       Plug 'heavenshell/vim-jsdoc'                                                                                 "  jsdoc helper
 
     " --- formatters/prettiers --- "
