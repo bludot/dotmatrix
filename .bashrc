@@ -1,7 +1,5 @@
 # ~/.bashrc
 
-export GOPATH=$HOME/go
-
 # Store 10,000 history entries
 export HISTSIZE=10000
 # Don't store duplicates
@@ -11,11 +9,6 @@ export HISTCONTROL=erasedups
 
 export VISUAL=nvim
 export EDITOR="$VISUAL"
-export LESS="FRX"
-export RI="--format ansi -T"
-export PSQL_EDITOR='vim -c"setf sql"'
-export CLICOLOR=1
-export LSCOLORS=gxgxcxdxbxegedabagacad
 
 #export VISUAL EDITOR LESS RI PSQL_EDITOR CLICOLOR LSCOLORS
 
